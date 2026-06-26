@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h1>Contacts</h1>
+<a href="/contacts/new" class="btn">New Contact</a>
+
+<% if (contacts.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Company</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% contacts.forEach(function(c) { %>
+        <tr>
+          <td><a href="/contacts/<%= c.id %>"><%= c.firstName %> <%= c.lastName %></a></td>
+          <td><%= c.email || '—' %></td>
+          <td><%= c.customer ? c.customer.name : '—' %></td>
+          <td><%= c.position || '—' %></td>
+          <td class="actions">
+            <a href="/contacts/<%= c.id %>/edit" class="btn-sm">Edit</a>
+            <form action="/contacts/<%= c.id %>?_method=DELETE" method="POST" class="inline">
+              <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Delete this contact?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p class="empty-state">No contacts yet. <a href="/contacts/new">Add one →</a></p>
+<% } %>
+
+<%- include('../partials/footer') %>

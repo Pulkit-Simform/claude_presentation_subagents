@@ -1,0 +1,78 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h1><%= customer.name %></h1>
+
+<div class="actions-bar">
+  <a href="/customers/<%= customer.id %>/edit" class="btn">Edit</a>
+  <form action="/customers/<%= customer.id %>?_method=DELETE" method="POST" class="inline">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this customer?')">Delete</button>
+  </form>
+  <a href="/customers" class="btn btn-secondary">Back</a>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-section">
+    <h2>Details</h2>
+    <table class="detail-table">
+      <tr><th>Industry</th><td><%= customer.industry || '—' %></td></tr>
+      <tr><th>Website</th><td><%= customer.website ? '<a href="' + customer.website + '">' + customer.website + '</a>' : '—' %></td></tr>
+      <tr><th>Phone</th><td><%= customer.phone || '—' %></td></tr>
+      <tr><th>Address</th><td><%= customer.address || '—' %></td></tr>
+      <tr><th>Created</th><td><%= customer.createdAt.toLocaleDateString() %></td></tr>
+    </table>
+  </div>
+
+  <div class="detail-section">
+    <h2>Notes</h2>
+    <p><%= customer.notes || 'No notes.' %></p>
+  </div>
+</div>
+
+<div class="detail-section">
+  <h2>Contacts (<%= customer.contacts.length %>)</h2>
+  <% if (customer.contacts.length) { %>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Phone</th><th>Position</th></tr>
+      </thead>
+      <tbody>
+        <% customer.contacts.forEach(function(c) { %>
+          <tr>
+            <td><a href="/contacts/<%= c.id %>"><%= c.firstName %> <%= c.lastName %></a></td>
+            <td><%= c.email || '—' %></td>
+            <td><%= c.phone || '—' %></td>
+            <td><%= c.position || '—' %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="empty-state">No contacts. <a href="/contacts/new?customerId=<%= customer.id %>">Add one →</a></p>
+  <% } %>
+</div>
+
+<div class="detail-section">
+  <h2>Deals (<%= customer.deals.length %>)</h2>
+  <% if (customer.deals.length) { %>
+    <table>
+      <thead>
+        <tr><th>Title</th><th>Value</th><th>Stage</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <% customer.deals.forEach(function(d) { %>
+          <tr>
+            <td><a href="/deals/<%= d.id %>"><%= d.title %></a></td>
+            <td><%= d.value ? '$' + d.value.toLocaleString() : '—' %></td>
+            <td><span class="badge badge-<%= d.stage %>"><%= d.stage %></span></td>
+            <td><%= d.status %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="empty-state">No deals. <a href="/deals/new?customerId=<%= customer.id %>">Add one →</a></p>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

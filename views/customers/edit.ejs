@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h1>Edit: <%= customer.name %></h1>
+
+<form action="/customers/<%= customer.id %>?_method=PUT" method="POST">
+  <div class="form-group">
+    <label for="name">Name *</label>
+    <input type="text" id="name" name="name" value="<%= customer.name %>" required>
+  </div>
+  <div class="form-group">
+    <label for="industry">Industry</label>
+    <input type="text" id="industry" name="industry" value="<%= customer.industry || '' %>">
+  </div>
+  <div class="form-group">
+    <label for="website">Website</label>
+    <input type="url" id="website" name="website" value="<%= customer.website || '' %>">
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" value="<%= customer.phone || '' %>">
+  </div>
+  <div class="form-group">
+    <label for="address">Address</label>
+    <textarea id="address" name="address" rows="3"><%= customer.address || '' %></textarea>
+  </div>
+  <div class="form-group">
+    <label for="notes">Notes</label>
+    <textarea id="notes" name="notes" rows="4"><%= customer.notes || '' %></textarea>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn">Update Customer</button>
+    <a href="/customers" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

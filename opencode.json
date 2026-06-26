@@ -1,0 +1,56 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "default_agent": "build",
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "git status *": "allow",
+      "npm run dev": "allow",
+      "npm run prisma:*": "allow",
+      "npx prisma *": "allow"
+    }
+  },
+  "instructions": [
+    "CLAUDE.md"
+  ],
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "plan": {
+      "mode": "primary",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    }
+  },
+  "command": {
+    "seed-db": {
+      "template": "Run the database seed script to populate sample CRM data",
+      "description": "Seed the database with sample customers, contacts, and deals",
+      "agent": "build"
+    },
+    "add-customer": {
+      "template": "Walk through creating a new customer. Ask me for the company name, industry, website, phone, address, and any notes. Then insert into the database and show me the result.",
+      "description": "Guided customer creation wizard",
+      "agent": "build"
+    },
+    "review-crm": {
+      "template": "Review the full codebase. Check for:\n- Error handling gaps\n- Missing input validation\n- Route consistency\n- Security concerns\n- EJS template quality\n- Prisma query efficiency\n\nProvide a report with specific file:line references.",
+      "description": "Full codebase review for quality and security",
+      "agent": "build"
+    }
+  },
+  "formatter": {
+    "prettier": {
+      "disabled": false
+    }
+  }
+}

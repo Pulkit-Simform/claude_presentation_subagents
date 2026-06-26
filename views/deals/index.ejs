@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h1>Deals</h1>
+<a href="/deals/new" class="btn">New Deal</a>
+
+<% if (deals.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Customer</th>
+        <th>Value</th>
+        <th>Stage</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% deals.forEach(function(d) { %>
+        <tr>
+          <td><a href="/deals/<%= d.id %>"><%= d.title %></a></td>
+          <td><%= d.customer ? d.customer.name : '—' %></td>
+          <td><%= d.value ? '$' + d.value.toLocaleString() : '—' %></td>
+          <td><span class="badge badge-<%= d.stage %>"><%= d.stage %></span></td>
+          <td><%= d.status %></td>
+          <td class="actions">
+            <a href="/deals/<%= d.id %>/edit" class="btn-sm">Edit</a>
+            <form action="/deals/<%= d.id %>?_method=DELETE" method="POST" class="inline">
+              <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Delete this deal?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p class="empty-state">No deals yet. <a href="/deals/new">Create one →</a></p>
+<% } %>
+
+<%- include('../partials/footer') %>

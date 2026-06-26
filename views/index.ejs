@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+<h1>Dashboard</h1>
+
+<div class="cards">
+  <div class="card">
+    <div class="card-number"><%= customerCount %></div>
+    <div class="card-label">Customers</div>
+    <a href="/customers" class="card-link">View all →</a>
+  </div>
+  <div class="card">
+    <div class="card-number"><%= contactCount %></div>
+    <div class="card-label">Contacts</div>
+    <a href="/contacts" class="card-link">View all →</a>
+  </div>
+  <div class="card">
+    <div class="card-number"><%= dealCount %></div>
+    <div class="card-label">Deals</div>
+    <a href="/deals" class="card-link">View all →</a>
+  </div>
+</div>
+
+<h2>Active Deals</h2>
+<% if (activeDeals.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Customer</th>
+        <th>Value</th>
+        <th>Stage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% activeDeals.forEach(function(deal) { %>
+        <tr>
+          <td><a href="/deals/<%= deal.id %>"><%= deal.title %></a></td>
+          <td><%= deal.customer.name %></td>
+          <td><%= deal.value ? '$' + deal.value.toLocaleString() : '—' %></td>
+          <td><span class="badge badge-<%= deal.stage %>"><%= deal.stage %></span></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p class="empty-state">No active deals yet. <a href="/deals/new">Create one →</a></p>
+<% } %>
+
+<%- include('partials/footer') %>

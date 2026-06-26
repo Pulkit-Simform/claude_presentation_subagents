@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h1><%= deal.title %></h1>
+
+<div class="actions-bar">
+  <a href="/deals/<%= deal.id %>/edit" class="btn">Edit</a>
+  <form action="/deals/<%= deal.id %>?_method=DELETE" method="POST" class="inline">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this deal?')">Delete</button>
+  </form>
+  <a href="/deals" class="btn btn-secondary">Back</a>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-section">
+    <h2>Details</h2>
+    <table class="detail-table">
+      <tr><th>Value</th><td><%= deal.value ? '$' + deal.value.toLocaleString() : '—' %></td></tr>
+      <tr><th>Stage</th><td><span class="badge badge-<%= deal.stage %>"><%= deal.stage %></span></td></tr>
+      <tr><th>Status</th><td><%= deal.status %></td></tr>
+      <tr><th>Company</th><td><%= deal.customer ? '<a href="/customers/' + deal.customer.id + '">' + deal.customer.name + '</a>' : '—' %></td></tr>
+      <tr><th>Contact</th><td><%= deal.contact ? '<a href="/contacts/' + deal.contact.id + '">' + deal.contact.firstName + ' ' + deal.contact.lastName + '</a>' : '—' %></td></tr>
+      <tr><th>Created</th><td><%= deal.createdAt.toLocaleDateString() %></td></tr>
+    </table>
+  </div>
+
+  <div class="detail-section">
+    <h2>Notes</h2>
+    <p><%= deal.notes || 'No notes.' %></p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

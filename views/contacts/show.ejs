@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<h1><%= contact.firstName %> <%= contact.lastName %></h1>
+
+<div class="actions-bar">
+  <a href="/contacts/<%= contact.id %>/edit" class="btn">Edit</a>
+  <form action="/contacts/<%= contact.id %>?_method=DELETE" method="POST" class="inline">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this contact?')">Delete</button>
+  </form>
+  <a href="/contacts" class="btn btn-secondary">Back</a>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-section">
+    <h2>Details</h2>
+    <table class="detail-table">
+      <tr><th>Email</th><td><%= contact.email || '—' %></td></tr>
+      <tr><th>Phone</th><td><%= contact.phone || '—' %></td></tr>
+      <tr><th>Position</th><td><%= contact.position || '—' %></td></tr>
+      <tr><th>Company</th><td><%= contact.customer ? '<a href="/customers/' + contact.customer.id + '">' + contact.customer.name + '</a>' : '—' %></td></tr>
+      <tr><th>Created</th><td><%= contact.createdAt.toLocaleDateString() %></td></tr>
+    </table>
+  </div>
+
+  <div class="detail-section">
+    <h2>Notes</h2>
+    <p><%= contact.notes || 'No notes.' %></p>
+  </div>
+</div>
+
+<div class="detail-section">
+  <h2>Deals (<%= contact.deals.length %>)</h2>
+  <% if (contact.deals.length) { %>
+    <table>
+      <thead>
+        <tr><th>Title</th><th>Value</th><th>Stage</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <% contact.deals.forEach(function(d) { %>
+          <tr>
+            <td><a href="/deals/<%= d.id %>"><%= d.title %></a></td>
+            <td><%= d.value ? '$' + d.value.toLocaleString() : '—' %></td>
+            <td><span class="badge badge-<%= d.stage %>"><%= d.stage %></span></td>
+            <td><%= d.status %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="empty-state">No deals associated with this contact.</p>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

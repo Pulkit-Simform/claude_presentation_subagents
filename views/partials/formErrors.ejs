@@ -1,0 +1,10 @@
+<% if (typeof errors !== 'undefined' && errors.length) { %>
+  <div class="alert alert-danger">
+    <strong>Please fix the following errors:</strong>
+    <ul>
+      <% errors.forEach(function(error) { %>
+        <li><%= error %></li>
+      <% }); %>
+    </ul>
+  </div>
+<% } %>

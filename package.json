@@ -1,0 +1,26 @@
+{
+  "name": "crm-claude-agents",
+  "version": "1.0.0",
+  "description": "CRM demo app for teaching Claude Code agents",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "node --watch src/app.js",
+    "start": "node src/app.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev --name init",
+    "prisma:seed": "node prisma/seed.js",
+    "setup": "npm run prisma:migrate && npm run prisma:seed"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.0.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
