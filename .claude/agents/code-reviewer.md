@@ -1,5 +1,7 @@
 ---
 name: code-reviewer
+color: red
+memory: project
 description: Reviews code written by code-writer against the plan spec for completeness, correctness, and quality. Automatically hands off to test-writer when done. Receives context from code-writer via handoff.
 model: claude-opus-4-8
 effort: high

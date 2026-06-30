@@ -1,5 +1,7 @@
 ---
 name: test-writer
+color: green
+memory: project
 description: Generates test cases for code implemented by code-writer. Receives handoff from code-reviewer with plan, review, and file list. Writes and runs tests, then prints the final pipeline summary.
 model: claude-haiku-4-5-20251001
 effort: low

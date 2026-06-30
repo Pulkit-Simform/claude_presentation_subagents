@@ -1,5 +1,7 @@
 ---
 name: planner
+color: purple
+memory: project
 description: Reads the latest requirements-YYYY-MM-DD.md from the project root and generates a structured implementation plan in plan/ with tasks t01, t02, t03. Use at the start of any new feature or demo pipeline run.
 model: claude-opus-4-8
 effort: low

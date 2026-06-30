@@ -1,5 +1,7 @@
 ---
 name: code-writer
+color: blue
+memory: project
 description: Reads the latest plan from plan/, spawns parallel subagents for t01/t02/t03, collects results, then automatically hands off to code-reviewer. Manually triggered by the user after planner completes.
 model: claude-sonnet-4-6
 effort: medium
