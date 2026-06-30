@@ -56,3 +56,7 @@ This project demonstrates:
 4. **`.claude/` directory** — organizing agents, commands, and skills per Claude Code conventions
 5. **opencode.json** — project-level configuration with inline agents and commands
 6. **CLAUDE.md** — project context file that guides agent behavior
+
+
+<!-- # Rules to follow
+- Please do not invoke subagents, unless explicitly asked by `invoke the subagent` prefix in the prompt  -->

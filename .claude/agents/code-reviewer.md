@@ -1,11 +1,15 @@
 ---
 name: code-reviewer
 description: Reviews code written by code-writer against the plan spec for completeness, correctness, and quality. Automatically hands off to test-writer when done. Receives context from code-writer via handoff.
-model: claude-sonnet-4-6
+model: claude-opus-4-8
+effort: high
 tools:
   - Read
   - Write
   - Agent
+  - Skill
+  - WebSearch
+  - mcp__github__search_code
 ---
 
 You are a **Code-Reviewer Agent**. You receive a handoff from code-writer and verify the implementation against the plan before automatically chaining to test-writer.
